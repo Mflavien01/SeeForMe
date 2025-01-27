@@ -1,6 +1,8 @@
 
 # Raspberry Pi Vision and Haptic Feedback System
 
+![Project Logo](logo/logo_name.png)
+
 This project is designed to run on a Raspberry Pi and utilizes cameras and sensors to detect specific objects in real-time. It offers visual, auditory, and haptic feedback based on the detected objects' characteristics and positions.
 
 ## Features
@@ -39,7 +41,7 @@ Before you begin, ensure you have met the following requirements:
 
 To run the project, navigate to the project directory and execute the following command:
 ```bash
-python3 main.py
+python raspi/main.py
 ```
 
 This script will start processing frames from the camera and provide auditory and haptic feedback based on object detection results. Make sure all devices and sensors are correctly connected before starting the script.
@@ -55,12 +57,13 @@ This script will start processing frames from the camera and provide auditory an
 - **Dependencies Not Installing**: Make sure you are using the latest version of pip. Upgrade pip using `sudo pip3 install --upgrade pip` and try installing the dependencies again.
 - **No Output from Script**: Verify that your sensors and haptic devices are wired correctly to the GPIO pins specified in the script.
 
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
 
 ## Contact
+
+![Project Logo with Name](logo/logo_name.png)
 
 Your Name - [Flavien MATHIEU](https://www.linkedin.com/in/flavien-mathieu/)  
 Project Link: [https://github.com/Mflavien01/SeeForMe](https://github.com/Mflavien01/SeeForMe)
