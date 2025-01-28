@@ -69,9 +69,7 @@ try:
 
         if intersection:
             x_coord = int(intersection[0])
-            # print(f"Intersection détectée à {x_coord} pixels")
-            # Augmentation du seuil de tolérance pour les vibrations directionnelles
-            tolerance = 100  # Valeur plus élevée pour un seuil de tolérance accru
+            tolerance = 100
             if x_coord > 700:
                 vibration_controller.vibrate_right()
                 # print("Droite")
@@ -90,7 +88,6 @@ try:
 
         for square in squares:
             if square[0][0][1] > lower_screen_threshold and not played_square_sound:
-                # detect left or right to play the right sound or the left sound
                 x_coord = int(square[0][0][0])
                 if x_coord > resized_frame.shape[1] / 2 + 50:
                     carre_a_droite.play()
@@ -102,7 +99,6 @@ try:
 
         for cross in crosses:
             if cross[0][0][1] > lower_screen_threshold and not played_cross_sound:
-                # detect left or right to play the right sound or the left sound
                 x_coord = int(cross[0][0][0])
                 if x_coord > resized_frame.shape[1] / 2 + 50:
                     croix_a_droite.play()
@@ -115,23 +111,21 @@ try:
 
         for cardboard in cardboards:
             x, y, w, h = cardboard
-            if w > h and not played_cardboard_sound:  # Vérification si la forme ressemble à un carton
+            if w > h and not played_cardboard_sound:
+                
+                #add this part if you want to use the lidar sensor
                 # distance = lidar.read_distance()
                 # if distance and distance < DISTANCE_THRESHOLD:
-                #     # print(f"Carton détecté à {distance:.2f} m")
-                #     trigger_alert(vibration_controller, sound_warning)
-                #     break  # Éviter plusieurs avertissements pour un même obstacle
+                #    sound_warning.play()
+                #     break
                 
-                # detect if the cardboard is on the lower part of the screen and size is big enough
-                # print("carton detected", x, y, w, h, w*h)
                 if y > lower_screen_threshold_cardboard:
-                    # print("ok cardboard")
                     carton_devant.play()
                     played_cardboard_sound = True
 
 
 
-
+        #add this part if you want to display the processed frame
         # cv2.imshow('Processed Frame', resized_frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
