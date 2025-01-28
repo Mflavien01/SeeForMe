@@ -65,5 +65,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 
 ![Project Logo with Name](logo/logo_name.png)
 
-Your Name - [Flavien MATHIEU](https://www.linkedin.com/in/flavien-mathieu/)  
+[Flavien MATHIEU](https://www.linkedin.com/in/flavien-mathieu/)  
 Project Link: [https://github.com/Mflavien01/SeeForMe](https://github.com/Mflavien01/SeeForMe)
