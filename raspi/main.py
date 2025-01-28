@@ -81,15 +81,13 @@ try:
             # else:
             #     print("OK")
 
-        played_square_sound = False
-        played_cross_sound = False
-        played_cardboard_sound = False
+        played_sound = False
         height = resized_frame.shape[0]
         lower_screen_threshold = int(height * (1 - LOWER_SCREEN_RATIO))
         lower_screen_threshold_cardboard = 400
 
         for square in squares:
-            if square[0][0][1] > lower_screen_threshold and not played_square_sound:
+            if square[0][0][1] > lower_screen_threshold and not played_sound:
                 # detect left or right to play the right sound or the left sound
                 x_coord = int(square[0][0][0])
                 if x_coord > resized_frame.shape[1] / 2 + 50:
@@ -98,10 +96,10 @@ try:
                     carre_a_gauche.play()
                 else:
                     carre_au_centre.play()
-                played_square_sound = True
+                played_sound = True
 
         for cross in crosses:
-            if cross[0][0][1] > lower_screen_threshold and not played_cross_sound:
+            if cross[0][0][1] > lower_screen_threshold and not played_sound:
                 # detect left or right to play the right sound or the left sound
                 x_coord = int(cross[0][0][0])
                 if x_coord > resized_frame.shape[1] / 2 + 50:
@@ -110,12 +108,12 @@ try:
                     croix_a_gauche.play()
                 else:
                     croix_au_centre.play()
-                played_cross_sound = True
+                played_sound = True
 
 
         for cardboard in cardboards:
             x, y, w, h = cardboard
-            if w > h and not played_cardboard_sound:  # Vérification si la forme ressemble à un carton
+            if w > h and not played_sound:  # Vérification si la forme ressemble à un carton
                 # distance = lidar.read_distance()
                 # if distance and distance < DISTANCE_THRESHOLD:
                 #     # print(f"Carton détecté à {distance:.2f} m")
@@ -124,10 +122,10 @@ try:
                 
                 # detect if the cardboard is on the lower part of the screen and size is big enough
                 # print("carton detected", x, y, w, h, w*h)
-                if y > lower_screen_threshold_cardboard:
+                if y > lower_screen_threshold_cardboard :
                     # print("ok cardboard")
                     carton_devant.play()
-                    played_cardboard_sound = True
+                    played_sound = True
 
 
 
