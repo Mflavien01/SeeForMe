@@ -9,10 +9,6 @@ import time
 pygame.init()
 pygame.mixer.init()
 
-# sound_success = pygame.mixer.Sound("raspi/son/success.wav")  # Son pour les croix
-# sound_error = pygame.mixer.Sound("raspi/son/error.wav")      # Son pour les cercles
-# sound_warning = pygame.mixer.Sound("raspi/son/warning.wav")  # Son pour les cartons proches
-
 croix_a_droite = pygame.mixer.Sound("raspi/son/croix_a_droite.wav")
 croix_a_gauche = pygame.mixer.Sound("raspi/son/croix_a_gauche.wav")
 croix_au_centre = pygame.mixer.Sound("raspi/son/croix_au_millieu.wav")
@@ -30,8 +26,8 @@ picam2.preview_configuration.main.format = 'XBGR8888'
 picam2.video_configuration.controls.FrameRate = 25.0
 picam2.start()
 
-LOWER_SCREEN_RATIO = 0.3  #detect object only on the lower part of the screen
-DISTANCE_THRESHOLD = 1.0  #critical distance for cardboard (in meters)
+LOWER_SCREEN_RATIO = 0.3
+DISTANCE_THRESHOLD = 1.0 
 
 
 vibration_controller = VibrationController(left_sensor_pin=27, right_sensor_pin=17)
@@ -72,22 +68,16 @@ try:
             tolerance = 100
             if x_coord > 700:
                 vibration_controller.vibrate_right()
-                # print("Droite")
             elif x_coord < 400:
                 vibration_controller.vibrate_left()
-                # print("Gauche")
-            # else:
-            #     print("OK")
 
-        played_square_sound = False
-        played_cross_sound = False
-        played_cardboard_sound = False
+        played_sound = False
         height = resized_frame.shape[0]
         lower_screen_threshold = int(height * (1 - LOWER_SCREEN_RATIO))
         lower_screen_threshold_cardboard = 400
 
         for square in squares:
-            if square[0][0][1] > lower_screen_threshold and not played_square_sound:
+            if square[0][0][1] > lower_screen_threshold and not played_sound:
                 x_coord = int(square[0][0][0])
                 if x_coord > resized_frame.shape[1] / 2 + 50:
                     carre_a_droite.play()
@@ -95,10 +85,10 @@ try:
                     carre_a_gauche.play()
                 else:
                     carre_au_centre.play()
-                played_square_sound = True
+                played_sound = True
 
         for cross in crosses:
-            if cross[0][0][1] > lower_screen_threshold and not played_cross_sound:
+            if cross[0][0][1] > lower_screen_threshold and not played_sound:
                 x_coord = int(cross[0][0][0])
                 if x_coord > resized_frame.shape[1] / 2 + 50:
                     croix_a_droite.play()
@@ -106,22 +96,22 @@ try:
                     croix_a_gauche.play()
                 else:
                     croix_au_centre.play()
-                played_cross_sound = True
+                played_sound = True
 
 
         for cardboard in cardboards:
             x, y, w, h = cardboard
-            if w > h and not played_cardboard_sound:
-                
+            if w > h and not played_sound: 
+
                 #add this part if you want to use the lidar sensor
                 # distance = lidar.read_distance()
                 # if distance and distance < DISTANCE_THRESHOLD:
                 #    sound_warning.play()
                 #     break
                 
-                if y > lower_screen_threshold_cardboard:
+                if y > lower_screen_threshold_cardboard :
                     carton_devant.play()
-                    played_cardboard_sound = True
+                    played_sound = True
 
 
 
